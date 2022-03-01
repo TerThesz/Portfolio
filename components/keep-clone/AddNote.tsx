@@ -63,6 +63,16 @@ const AddNote = ({ set_content }: any) => {
               set_content((old_content: Array<any>) => {
                 return [{ title, content }, ...old_content];
               });
+
+              const content_element = document.getElementById('new-note-content') as HTMLElement;
+              const title_element = document.getElementById('new-note-title') as HTMLInputElement;
+
+              content_element.innerHTML = '';
+              title_element.value = '';
+
+              content_element.dispatchEvent(new Event('blur'));
+
+              document.getElementById('new-note-content-placeholder')?.classList.remove('hidden');
             }}
           >
             save

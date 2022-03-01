@@ -21,6 +21,6 @@
 
   input,
   textarea {
-    @apply placeholder:text-gray-600 placeholder:font-medium outline-none border-none resize-none;
+    @apply placeholder:text-gray-600 placeholder:font-medium outline-none border-none;
   }
 }

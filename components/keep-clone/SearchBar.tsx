@@ -7,18 +7,18 @@ const SearchBar = ({ set_found, content, found }: any) => {
 
       <input
         onInput={(e) => {
-          if ((e.target as HTMLInputElement).value === '') return set_found(null);
+          if ((e.target as HTMLInputElement).value === '') return set_found([]);
 
-          set_found(
-            content.filter((note: any) => {
-              console.log(note);
+          const found_notes = content.filter((note: any) => {
+            console.log(note);
 
-              return (
-                note.title.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', '')) ||
-                note.content.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', ''))
-              );
-            })
-          );
+            return (
+              note.title.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', '')) ||
+              note.content.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', ''))
+            );
+          });
+
+          set_found(found_notes.length ? found_notes : null);
         }}
         type='text'
         id='search-bar'

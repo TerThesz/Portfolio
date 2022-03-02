@@ -3,7 +3,7 @@ const Notes = ({ found_content, content }: any) => {
     <div className='w-full h-full mt-20 px-20 grid grid-cols-5 gap-5 dark:bg-gray-700 dark:text-white'>
       {(() => {
         if (found_content && found_content.length) return found_content.map((note: any, key: any) => <NoteElement data={note} key={key} />);
-        if (content.length) return content.map((note: any, key: any) => <NoteElement data={note} key={key} />);
+        if (found_content !== null && content.length) return content.map((note: any, key: any) => <NoteElement data={note} key={key} />);
 
         return <p className='text-center text-gray-600 dark:text-white col-span-5'>No notes found.</p>;
       })()}

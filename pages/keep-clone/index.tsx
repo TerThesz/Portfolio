@@ -7,7 +7,7 @@ import SearchBar from '../../components/keep-clone/SearchBar';
 
 const index: NextPage = () => {
   const [content, set_content] = useState([]);
-  const [found_content, set_found_content] = useState([]);
+  const [found_content, set_found_content] = useState(null);
 
   useEffect(() => {
     if (localStorage.theme === 'dark') return document.documentElement.classList.add('dark');

@@ -7,7 +7,7 @@
 @layer components {
   html,
   body {
-    @apply w-screen h-screen m-0 p-0;
+    @apply w-screen h-screen m-0 p-0 overflow-x-hidden;
   }
 
   *,
@@ -21,6 +21,6 @@
 
   input,
   textarea {
-    @apply placeholder:text-gray-600 placeholder:font-medium outline-none border-none;
+    @apply placeholder:text-gray-600 dark:text-white placeholder:dark:text-white placeholder:font-medium outline-none border-none;
   }
 }

@@ -16,7 +16,7 @@ const index: NextPage = () => {
   }, []);
 
   return (
-    <div className='w-full h-screen flex flex-col justify-center items-center dark:bg-gray-700'>
+    <div className='w-full flex flex-col justify-center items-center dark:bg-gray-700'>
       <SearchBar set_found={set_found_content} content={content} found={found_content} />
       <AddNote set_content={set_content} />
 

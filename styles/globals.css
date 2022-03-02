@@ -7,7 +7,7 @@
 @layer components {
   html,
   body {
-    @apply w-screen h-screen m-0 p-0 overflow-x-hidden;
+    @apply w-screen h-screen m-0 p-0 overflow-x-hidden dark:bg-gray-700;
   }
 
   *,
@@ -22,5 +22,13 @@
   input,
   textarea {
     @apply placeholder:text-gray-600 dark:text-white placeholder:dark:text-white placeholder:font-medium outline-none border-none;
+  }
+
+  #new-note-wrapper:focus-within #new-note-save {
+    @apply flex;
+  }
+
+  #new-note-wrapper:focus-within #new-note-title {
+    @apply block;
   }
 }

@@ -4,23 +4,6 @@ const AddNote = ({ set_content }: any) => {
   useEffect(() => {
     const content_element = document.getElementById('new-note-content');
 
-    content_element?.addEventListener('focus', () => {
-      document.getElementById('new-note-title')?.classList.remove('hidden');
-
-      document.getElementById('new-note-menu')?.classList.remove('hidden');
-      document.getElementById('new-note-menu')?.classList.add('flex');
-    });
-
-    content_element?.addEventListener('blur', () => {
-      // @ts-ignore
-      if (content_element.innerHTML === '' && document.getElementById('new-note-title')?.value === '') {
-        document.getElementById('new-note-title')?.classList.add('hidden');
-
-        document.getElementById('new-note-menu')?.classList.add('hidden');
-        document.getElementById('new-note-menu')?.classList.remove('flex');
-      }
-    });
-
     content_element?.addEventListener('input', () => {
       if (content_element?.innerHTML !== '') return document.getElementById('new-note-content-placeholder')?.classList.add('hidden');
       document.getElementById('new-note-content-placeholder')?.classList.remove('hidden');
@@ -35,7 +18,10 @@ const AddNote = ({ set_content }: any) => {
 
   return (
     <>
-      <div className='relative w-[40rem] bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 drop-shadow-sm rounded-lg mt-4 p-5 dark:text-white'>
+      <div
+        id='new-note-wrapper'
+        className='relative w-[40rem] bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 drop-shadow-sm rounded-lg mt-4 p-5 dark:text-white'
+      >
         <input
           id='new-note-title'
           type='text'
@@ -54,27 +40,27 @@ const AddNote = ({ set_content }: any) => {
           >
             Take a note. . .
           </p>
-        </div>
 
-        <div id='new-note-menu' className='hidden w-full mt-3'>
           <button
-            className='hover:font-medium'
+            className='hover:font-medium hidden'
             id='new-note-save'
             onClick={() => {
               // @ts-ignore
-              const title = document.getElementById('new-note-title')?.value;
-              const content = document
-                .getElementById('new-note-content')
-                ?.innerHTML.replaceAll('<', '&lt;')
-                .replaceAll('>', '&gt;')
-                .replaceAll('&lt;br&gt;', '<br>')
-                .replaceAll('&lt;div&gt;', '<div>')
-                .replaceAll('&lt;/div&gt;', '</div>');
+              const title = document.getElementById('new-note-title')?.value + '';
+              const content =
+                document
+                  .getElementById('new-note-content')
+                  ?.innerHTML.replaceAll('<', '&lt;')
+                  .replaceAll('>', '&gt;')
+                  .replaceAll('&lt;br&gt;', '<br>')
+                  .replaceAll('&lt;div&gt;', '<div>')
+                  .replaceAll('&lt;/div&gt;', '</div>') + '';
 
-              set_content((old_content: Array<any>) => {
-                console.log([{ title, content }, ...old_content]);
-                return [{ title, content }, ...old_content];
-              });
+              if (!(content.replaceAll(' ', '').replaceAll('&nbsp;', '') === '' && title.replaceAll(' ', '') === '')) {
+                set_content((old_content: Array<any>) => {
+                  return [{ title, content }, ...old_content];
+                });
+              }
 
               const content_element = document.getElementById('new-note-content') as HTMLElement;
               const title_element = document.getElementById('new-note-title') as HTMLInputElement;
@@ -85,6 +71,8 @@ const AddNote = ({ set_content }: any) => {
               content_element.dispatchEvent(new Event('blur'));
 
               document.getElementById('new-note-content-placeholder')?.classList.remove('hidden');
+              // @ts-ignore
+              document.activeElement?.blur();
             }}
           >
             save

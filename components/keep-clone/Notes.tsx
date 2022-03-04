@@ -1,3 +1,6 @@
+import { MdModeEdit, MdDelete } from 'react-icons/md';
+import { show_modal } from './EditModal';
+
 const Notes = ({ found_content, content }: any) => {
   return (
     <div className='w-full h-full mt-20 px-20 grid grid-cols-5 gap-5 dark:bg-gray-700 dark:text-white'>
@@ -13,9 +16,24 @@ const Notes = ({ found_content, content }: any) => {
 
 const NoteElement = ({ data }: any) => {
   return (
-    <div className='w-full max-w-full break-all rounded-lg border p-6 border-gray-300 dark:border-gray-900'>
+    <div
+      id='note'
+      className='note relative bg-white w-full max-w-full break-all rounded-lg border p-6 border-gray-300 dark:border-gray-900 hover:border-gray-400 dark:hover:border-black hover:drop-shadow-md'
+    >
       {data.title ? <h3 className='text-[18px] font-[600] mb-2'>{data.title}</h3> : null}
       <p dangerouslySetInnerHTML={{ __html: data.content }} className='text-[16px] font-[400]'></p>
+
+      <div id='note-menu' className='hidden absolute right-5 top-5'>
+        <div
+          onClick={() => show_modal(data)}
+          className='ml-3 p-[.35rem] bg-gray-500 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
+        >
+          <MdModeEdit size='19px' />
+        </div>
+        <div className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'>
+          <MdDelete size='19px' />
+        </div>
+      </div>
     </div>
   );
 };

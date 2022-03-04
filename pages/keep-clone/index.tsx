@@ -2,12 +2,13 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import AddNote from '../../components/keep-clone/AddNote';
 import ChangeTheme from '../../components/keep-clone/ChangeTheme';
+import EditModal from '../../components/keep-clone/EditModal';
 import Notes from '../../components/keep-clone/Notes';
 import SearchBar from '../../components/keep-clone/SearchBar';
 
 const index: NextPage = () => {
   const [content, set_content] = useState([]);
-  const [found_content, set_found_content] = useState(null);
+  const [found_content, set_found_content] = useState([]);
 
   useEffect(() => {
     if (localStorage.theme === 'dark') return document.documentElement.classList.add('dark');
@@ -23,6 +24,8 @@ const index: NextPage = () => {
       <Notes found_content={found_content} content={content} />
 
       <ChangeTheme />
+
+      <EditModal set_content={set_content} />
     </div>
   );
 };

@@ -31,4 +31,8 @@
   #new-note-wrapper:focus-within #new-note-title {
     @apply block;
   }
+
+  #note:hover #note-menu {
+    @apply !flex;
+  }
 }

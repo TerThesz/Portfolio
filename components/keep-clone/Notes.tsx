@@ -1,12 +1,14 @@
 import { MdModeEdit, MdDelete } from 'react-icons/md';
-import { show_modal } from './EditModal';
+import { show_edit_modal } from './EditModal';
 
-const Notes = ({ found_content, content }: any) => {
+const Notes = ({ found_content, content, set_note_to_edit }: any) => {
   return (
     <div className='w-full h-full mt-20 px-20 grid grid-cols-5 gap-5 dark:bg-gray-700 dark:text-white'>
       {(() => {
-        if (found_content && found_content.length) return found_content.map((note: any, key: any) => <NoteElement data={note} key={key} />);
-        if (found_content !== null && content.length) return content.map((note: any, key: any) => <NoteElement data={note} key={key} />);
+        if (found_content && found_content.length)
+          return found_content.map((note: any, key: any) => <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} />);
+        if (found_content !== null && content.length)
+          return content.map((note: any, key: any) => <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} />);
 
         return <p className='text-center text-gray-600 dark:text-white col-span-5'>No notes found.</p>;
       })()}
@@ -14,7 +16,7 @@ const Notes = ({ found_content, content }: any) => {
   );
 };
 
-const NoteElement = ({ data }: any) => {
+const NoteElement = ({ data, set_note_to_edit }: any) => {
   return (
     <div
       id='note'
@@ -25,7 +27,7 @@ const NoteElement = ({ data }: any) => {
 
       <div id='note-menu' className='hidden absolute right-5 top-5'>
         <div
-          onClick={() => show_modal(data)}
+          onClick={() => show_edit_modal(data, set_note_to_edit)}
           className='ml-3 p-[.35rem] bg-gray-500 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
         >
           <MdModeEdit size='19px' />

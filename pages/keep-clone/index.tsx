@@ -9,6 +9,7 @@ import SearchBar from '../../components/keep-clone/SearchBar';
 const index: NextPage = () => {
   const [content, set_content] = useState([]);
   const [found_content, set_found_content] = useState([]);
+  const [note_to_edit, set_note_to_edit] = useState(null);
 
   useEffect(() => {
     if (localStorage.theme === 'dark') return document.documentElement.classList.add('dark');
@@ -21,11 +22,11 @@ const index: NextPage = () => {
       <SearchBar set_found={set_found_content} content={content} found={found_content} />
       <AddNote set_content={set_content} />
 
-      <Notes found_content={found_content} content={content} />
+      <Notes found_content={found_content} content={content} set_note_to_edit={set_note_to_edit} />
 
       <ChangeTheme />
 
-      <EditModal set_content={set_content} />
+      <EditModal set_content={set_content} note_to_edit={note_to_edit} />
     </div>
   );
 };

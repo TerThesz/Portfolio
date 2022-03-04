@@ -58,7 +58,14 @@ const AddNote = ({ set_content }: any) => {
 
               if (!(content.replaceAll(' ', '').replaceAll('&nbsp;', '') === '' && title.replaceAll(' ', '') === '')) {
                 set_content((old_content: Array<any>) => {
-                  return [{ title, content, text: document.getElementById('new-note-content')?.innerText }, ...old_content];
+                  return [
+                    {
+                      title,
+                      content,
+                      dt: new Date().getTime(),
+                    },
+                    ...old_content,
+                  ];
                 });
               }
 

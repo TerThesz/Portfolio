@@ -14,7 +14,12 @@ const SearchBar = ({ set_found, content, found }: any) => {
 
             return (
               note.title.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', '')) ||
-              note.text.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', ''))
+              note.content
+                .toLowerCase()
+                .replaceAll('&lt;', '')
+                .replaceAll('&gt;', '')
+                .replaceAll('&nbsp;', '')
+                .includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', ''))
             );
           });
 

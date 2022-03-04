@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
-const EditModal = ({ set_content }: any) => {
+const EditModal = ({ set_content, note_to_edit }: any) => {
   useEffect(() => {
     const content_element = document.getElementById('edit-note-content');
 
@@ -21,6 +21,7 @@ const EditModal = ({ set_content }: any) => {
           type='text'
           className='text-[22px] placeholder:font-[700] font-[500] w-full mb-2 bg-transparent'
           placeholder='Title'
+          defaultValue={note_to_edit?.title}
         />
 
         <div className='w-full relative'>
@@ -28,13 +29,17 @@ const EditModal = ({ set_content }: any) => {
             id='edit-note-content'
             className='text-[17px] min-h-[50px] max-h-[300px] placeholder:font-[700] font-[400] w-full overflow-x-hidden overflow-y-auto outline-none border-none'
             contentEditable
-          ></div>
-          <p
-            id='edit-note-content-placeholder'
-            className='absolute top-0 left-0 text-[17px] text-gray-600 dark:text-white font-medium pointer-events-none'
           >
-            Edit note content. . .
-          </p>
+            {note_to_edit?.content}
+          </div>
+          {note_to_edit?.content?.length ? null : (
+            <p
+              id='edit-note-content-placeholder'
+              className='absolute top-0 left-0 text-[17px] text-gray-600 dark:text-white font-medium pointer-events-none'
+            >
+              Edit note content. . .
+            </p>
+          )}
         </div>
 
         <button
@@ -42,10 +47,10 @@ const EditModal = ({ set_content }: any) => {
           id='edit-note-save'
           onClick={() => {
             // @ts-ignore
-            const title = document.getElementById('new-note-title')?.value + '';
+            const title = document.getElementById('edit-note-title')?.value + '';
             const content =
               document
-                .getElementById('new-note-content')
+                .getElementById('edit-note-content')
                 ?.innerHTML.replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;')
                 .replaceAll('&lt;br&gt;', '<br>')
@@ -53,19 +58,20 @@ const EditModal = ({ set_content }: any) => {
                 .replaceAll('&lt;/div&gt;', '</div>') + '';
 
             if (!(content.replaceAll(' ', '').replaceAll('&nbsp;', '') === '' && title.replaceAll(' ', '') === '')) {
+              set_content((old_content: any) => {
+                const index = old_content.indexOf(note_to_edit);
+
+                old_content[index] = {
+                  title,
+                  content,
+                  dt: new Date().getTime(),
+                };
+
+                return [...old_content];
+              });
             }
 
-            const content_element = document.getElementById('new-note-content') as HTMLElement;
-            const title_element = document.getElementById('new-note-title') as HTMLInputElement;
-
-            content_element.innerHTML = '';
-            title_element.value = '';
-
-            content_element.dispatchEvent(new Event('blur'));
-
-            document.getElementById('new-note-content-placeholder')?.classList.remove('hidden');
-            // @ts-ignore
-            document.activeElement?.blur();
+            clear_modal();
           }}
         >
           edit
@@ -80,27 +86,23 @@ const EditModal = ({ set_content }: any) => {
 };
 
 function clear_modal() {
-  (document.getElementById('edit-note-content') as HTMLElement).innerHTML = '';
-  (document.getElementById('edit-note-title') as HTMLInputElement).value = '';
-
   (document.getElementById('edit-note') as HTMLElement).classList.add('hidden');
   (document.getElementById('edit-note') as HTMLElement).classList.remove('flex');
 
   document.body.style.overflowY = 'auto';
 }
 
-function show_modal(note: any) {
-  (document.getElementById('edit-note-content') as HTMLElement).innerHTML = note.content;
-  (document.getElementById('edit-note-title') as HTMLInputElement).value = note.title;
-
+function show_edit_modal(note: any, set_note_to_edit: any) {
   (document.getElementById('edit-note') as HTMLElement).classList.remove('hidden');
   (document.getElementById('edit-note') as HTMLElement).classList.add('flex');
 
-  if (note.text.length) (document.getElementById('edit-note-content-placeholder') as HTMLElement).classList.add('hidden');
-
   document.body.style.overflowY = 'hidden';
+
+  console.log(note);
+
+  set_note_to_edit(note);
 }
 
 export default EditModal;
 
-export { show_modal };
+export { show_edit_modal };

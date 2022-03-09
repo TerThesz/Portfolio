@@ -14,6 +14,7 @@ const EditModal = ({ set_content, note_to_edit }: any) => {
     <div
       id='edit-note'
       className='hidden fixed top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2 w-full h-full bg-black bg-opacity-10'
+      onClick={(e) => (e.target as HTMLElement).id === 'edit-note' && clear_modal()}
     >
       <div className='w-[40rem] min-h-10 bg-white dark:bg-gray-800 border border-gray-300 border-solid dark:border-gray-900 drop-shadow-sm rounded-lg mt-4 p-5 dark:text-white'>
         <input
@@ -98,9 +99,9 @@ function show_edit_modal(note: any, set_note_to_edit: any) {
 
   document.body.style.overflowY = 'hidden';
 
-  console.log(note);
-
   set_note_to_edit(note);
+
+  (document.getElementById('edit-note-title') as HTMLInputElement).value = note.title;
 }
 
 export default EditModal;

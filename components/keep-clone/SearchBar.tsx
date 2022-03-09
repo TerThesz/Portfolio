@@ -10,8 +10,6 @@ const SearchBar = ({ set_found, content, found }: any) => {
           if ((e.target as HTMLInputElement).value === '') return set_found([]);
 
           const found_notes = content.filter((note: any) => {
-            console.log(note);
-
             return (
               note.title.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase().replaceAll(' ', '')) ||
               note.content

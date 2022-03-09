@@ -12,7 +12,7 @@
 
   *,
   *::before *::after {
-    @apply box-border font-manrope;
+    @apply box-border font-manrope transition-colors ease-linear duration-200;
   }
 
   .link {

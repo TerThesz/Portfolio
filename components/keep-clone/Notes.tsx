@@ -1,4 +1,4 @@
-import { MdModeEdit, MdDelete } from 'react-icons/md';
+import { MdModeEdit } from 'react-icons/md';
 import { show_edit_modal } from './EditModal';
 
 const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) => {
@@ -6,13 +6,9 @@ const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) =
     <div className='w-full h-full mt-20 md:px-20 px-4 grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 dark:bg-gray-700 dark:text-white'>
       {(() => {
         if (found_content && found_content.length)
-          return found_content.map((note: any, key: any) => (
-            <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} set_content={set_content} />
-          ));
+          return found_content.map((note: any, key: any) => <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} />);
         if (found_content !== null && content.length)
-          return content.map((note: any, key: any) => (
-            <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} set_content={set_content} />
-          ));
+          return content.map((note: any, key: any) => <NoteElement data={note} key={key} set_note_to_edit={set_note_to_edit} />);
 
         return <p className='text-center text-gray-600 dark:text-white col-span-5'>No notes found.</p>;
       })()}
@@ -20,7 +16,7 @@ const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) =
   );
 };
 
-const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
+const NoteElement = ({ data, set_note_to_edit }: any) => {
   return (
     <div
       id='note'
@@ -35,20 +31,6 @@ const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
           className='ml-3 p-[.35rem] bg-gray-500 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
         >
           <MdModeEdit size='19px' />
-        </div>
-        <div
-          onClick={() => {
-            set_content((old_content: any) => {
-              const index = old_content.indexOf(data);
-
-              old_content = old_content.splice(index, 1);
-
-              return old_content;
-            });
-          }}
-          className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
-        >
-          <MdDelete size='19px' />
         </div>
       </div>
     </div>

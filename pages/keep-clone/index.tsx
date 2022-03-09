@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import AddNote from '../../components/keep-clone/AddNote';
 import ChangeTheme from '../../components/keep-clone/ChangeTheme';
+import DeleteModal from '../../components/keep-clone/DeleteModal';
 import EditModal from '../../components/keep-clone/EditModal';
 import Notes from '../../components/keep-clone/Notes';
 import SearchBar from '../../components/keep-clone/SearchBar';
@@ -27,6 +28,7 @@ const index: NextPage = () => {
       <ChangeTheme />
 
       <EditModal set_content={set_content} note_to_edit={note_to_edit} />
+      <DeleteModal set_content={set_content} />
     </div>
   );
 };

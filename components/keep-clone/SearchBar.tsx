@@ -2,7 +2,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 
 const SearchBar = ({ set_found, content, found }: any) => {
   return (
-    <div className='mt-20 w-[40rem] flex bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 rounded-lg p-5 dark:text-white'>
+    <div className='mt-20 w-[min(40rem,95%)] flex bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 rounded-lg p-5 dark:text-white'>
       <AiOutlineSearch size='18px' />
 
       <input

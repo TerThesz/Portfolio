@@ -23,7 +23,7 @@ const ChangeTheme = () => {
           set_theme('dark');
         }
       }}
-      className='absolute right-14 bottom-10 text-gray-800 dark:text-yellow-200 p-4 dark:bg-gray-800 drop-shadow-md hover:scale-105 cursor-pointer active:scale-100 bg-gray-100 rounded-full'
+      className='fixed md:right-14 right-8 md:bottom-10 bottom-8 text-gray-800 dark:text-yellow-200 p-4 dark:bg-gray-800 drop-shadow-md hover:scale-105 cursor-pointer active:scale-100 bg-gray-100 rounded-full'
     >
       {theme === 'light' ? <BsFillMoonFill size='18px' /> : <BsFillSunFill size='20px' />}
     </div>

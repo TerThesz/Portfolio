@@ -3,7 +3,7 @@ import { show_edit_modal } from './EditModal';
 
 const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) => {
   return (
-    <div className='w-full h-full mt-20 px-20 grid grid-cols-5 gap-5 dark:bg-gray-700 dark:text-white'>
+    <div className='w-full h-full mt-20 md:px-20 px-4 grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 dark:bg-gray-700 dark:text-white'>
       {(() => {
         if (found_content && found_content.length)
           return found_content.map((note: any, key: any) => (
@@ -24,7 +24,7 @@ const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
   return (
     <div
       id='note'
-      className='note relative bg-white w-full max-w-full break-all rounded-lg border p-6 border-gray-300 dark:border-gray-900 hover:border-gray-400 dark:hover:border-black hover:drop-shadow-md'
+      className='note relative bg-white dark:bg-transparent w-full max-w-full break-all rounded-lg border p-6 border-gray-300 dark:border-gray-900 hover:border-gray-400 dark:hover:border-black hover:drop-shadow-md'
     >
       {data.title ? <h3 className='text-[18px] font-[600] mb-2'>{data.title}</h3> : null}
       <p dangerouslySetInnerHTML={{ __html: data.content }} className='text-[16px] font-[400]'></p>
@@ -38,8 +38,6 @@ const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
         </div>
         <div
           onClick={() => {
-            alert(1);
-
             set_content((old_content: any) => {
               const index = old_content.indexOf(data);
 

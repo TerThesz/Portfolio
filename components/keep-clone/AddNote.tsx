@@ -20,7 +20,7 @@ const AddNote = ({ set_content }: any) => {
     <>
       <div
         id='new-note-wrapper'
-        className='relative w-[40rem] bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 drop-shadow-sm rounded-lg mt-4 p-5 dark:text-white'
+        className='relative w-[min(40rem,95%)] bg-white dark:bg-gray-800 border border-gray-200 border-solid dark:border-gray-900 drop-shadow-sm rounded-lg mt-4 p-5 dark:text-white'
       >
         <input
           id='new-note-title'

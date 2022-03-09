@@ -20,7 +20,7 @@ const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) =
   );
 };
 
-const NoteElement = ({ data, set_note_to_edit, set_content, set_found }: any) => {
+const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
   return (
     <div
       id='note'
@@ -36,7 +36,20 @@ const NoteElement = ({ data, set_note_to_edit, set_content, set_found }: any) =>
         >
           <MdModeEdit size='19px' />
         </div>
-        <div className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'>
+        <div
+          onClick={() => {
+            alert(1);
+
+            set_content((old_content: any) => {
+              const index = old_content.indexOf(data);
+
+              old_content = old_content.splice(index, 1);
+
+              return old_content;
+            });
+          }}
+          className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
+        >
           <MdDelete size='19px' />
         </div>
       </div>

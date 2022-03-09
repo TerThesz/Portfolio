@@ -1,4 +1,3 @@
-import { confirmAlert } from 'react-confirm-alert';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
 import { show_edit_modal } from './EditModal';
 
@@ -21,7 +20,7 @@ const Notes = ({ found_content, content, set_content, set_note_to_edit }: any) =
   );
 };
 
-const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
+const NoteElement = ({ data, set_note_to_edit, set_content, set_found }: any) => {
   return (
     <div
       id='note'
@@ -37,35 +36,7 @@ const NoteElement = ({ data, set_note_to_edit, set_content }: any) => {
         >
           <MdModeEdit size='19px' />
         </div>
-        <div
-          onClick={() =>
-            confirmAlert({
-              title: 'Delete note',
-              message: 'Are you sure you want to delete this note?',
-              buttons: [
-                {
-                  label: 'Yes',
-                  onClick: () => {
-                    set_content((old_content: any) => {
-                      const index = old_content.indexOf(data);
-
-                      old_content.splice(index, 1);
-
-                      return [...old_content];
-                    });
-                  },
-                },
-                {
-                  label: 'No',
-                  onClick: () => {},
-                },
-              ],
-              closeOnEscape: true,
-              closeOnClickOutside: true,
-            })
-          }
-          className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'
-        >
+        <div className='ml-3 p-[.35rem] bg-red-400 text-white rounded-md drop-shadow-sm cursor-pointer hover:scale-105 active:scale-100'>
           <MdDelete size='19px' />
         </div>
       </div>

@@ -6,7 +6,7 @@ import EditModal from '../../components/keep-clone/EditModal';
 import Notes from '../../components/keep-clone/Notes';
 import SearchBar from '../../components/keep-clone/SearchBar';
 
-const index: NextPage = () => {
+const Index: NextPage = () => {
   const [content, set_content] = useState([]);
   const [found_content, set_found_content] = useState([]);
   const [note_to_edit, set_note_to_edit] = useState(null);
@@ -31,4 +31,4 @@ const index: NextPage = () => {
   );
 };
 
-export default index;
+export default Index;
